@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <title>商品登録</title>
+</head>
+
+<body>
+    <div class="contents">
+        <div class="container">
+            <h1>新規登録</h1>
+            <form method="POST" action="/item" th:action="@{/item/regist}" th:object="${item}">
+                <table>
+                    <tr>
+                        <th>商品名</th>
+                        <td><input type="text" name="name" size=50></td>
+                    </tr>
+                    <tr>
+                        <th>内容量</th>
+                        <td><input type="text" name="capacity" size=50></td>
+                    </tr>
+                    <tr>
+                        <th>価格</th>
+                        <td><input type="text" name="price" size=50></td>
+                    </tr>
+                    <tr>
+                        <th>カロリー</th>
+                        <td><input type="text" name="calorie" size=50></td>
+                    </tr>                                                            
+                </table>
+                <div>
+                    <input type="submit" value="登録">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<footer>
+    <script src="/js/jquery-3.4.1.min"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</footer>
+
+</html>

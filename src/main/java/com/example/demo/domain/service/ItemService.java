@@ -18,4 +18,18 @@ public class ItemService {
         return mapper.findAll();
     }
 
+    public Item findOne(int id)
+    {
+        return mapper.findOne(id);
+    }
+
+    public void save(Item item)
+    {
+        mapper.create(item);
+    }
+
+    public void update(Item item)
+    {
+        mapper.update(item);
+    }
 }

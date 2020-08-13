@@ -12,15 +12,18 @@ import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface ItemMapper {
-    @Select("SELECT * FROM item")
+    @Select("SELECT * FROM demo.item")
     List<Item> findAll();
 
-    @Insert("INSERT INTO item VALUES(#{id}, #{name}, #{price}, #{url})")
+    @Select("SELECT * FROM demo.item WHERE id = #{id}")
+    Item findOne(int id);
+
+    @Insert("INSERT INTO demo.item(name, capacity, price, calorie, url) VALUES(#{name}, #{capacity}, #{price}, #{calorie}, #{url})")
     public int create(Item item);
 
-    @Update("UPDATE item SET name=#{name}, price=#{price}, url=#{url} WHERE id = #{id}")
+    @Update("UPDATE demo.item SET name=#{name}, capacity=#{capacity}, price=#{price}, calorie=#{calorie}, url=#{url} WHERE id = #{id}")
     public int update(Item item);
 
-    @Delete("DELETE FROM item WHERE id = #{id}")
+    @Delete("DELETE FROM demo.item WHERE id = #{id}")
     public int delete(Item item);
 }
