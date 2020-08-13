@@ -13,7 +13,11 @@ public class Item implements Serializable{
 
     private String name;
 
+    private int capacity;
+
     private int price;
+
+    private int calorie;
 
     private String url;
 

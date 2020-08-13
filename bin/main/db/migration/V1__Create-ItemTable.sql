@@ -1,8 +1,10 @@
 CREATE TABLE demo.item
 (
-  id varchar(12) NOT NULL,
+  id serial NOT NULL,
   name varchar(255),
+  capacity integer,
   price integer,
+  calorie integer,
   url text,
   PRIMARY KEY (id)
 );

@@ -22,7 +22,7 @@ public class ItemController {
 
 		List<Item> itemList = service.findAll();
 
-		model.addAttribute("count", itemList.size());
+		model.addAttribute("items", itemList);
 		return "item/list";
 	}
 }
