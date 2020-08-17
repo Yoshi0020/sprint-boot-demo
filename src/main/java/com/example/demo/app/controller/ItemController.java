@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,14 +40,14 @@ public class ItemController {
 	}
 
 	@PostMapping("regist")
-	public String regist(@ModelAttribute("form") @Valid ItemForm form, BindingResult result, Model model) {
+	public String regist(@ModelAttribute("form") @Valid ItemForm itemForm, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			
-			model.addAttribute("form", form);
+			model.addAttribute("form", itemForm);
 			return "item/regist";
 		}
 
-		service.save(form.createItem());
+		service.save(itemForm.createItem());
 
 		List<Item> itemList = service.findAll();
 
