@@ -12,7 +12,8 @@
     <div class="contents">
         <div class="container">
             <h1>新規登録</h1>
-            <form class="form-horizontal" method="POST" action="/item" th:action="@{/item/regist}" th:object="${form}">
+            <form class="form-horizontal" method="POST" action="/item" th:action="@{/item/regist}"
+                th:object="${itemForm}">
                 <div class="form-group row">
                     <label for="itemName" class="col-sm-1 control-label col-form-label">商品名</label>
                     <div class="col-sm-4">
@@ -23,7 +24,7 @@
                 <div class="form-group row">
                     <label for="capacity" class="col-sm-1 control-label col-form-label">内容量</label>
                     <div class="col-sm-2">
-                        <input type="number" min="0" max="99999" class="form-control" name="capacity" id="capacity">
+                        <input type="text" min="0" max="99999" class="form-control" name="capacity" id="capacity">
                         <p class="text-danger" th:if="${#fields.hasErrors('capacity')}" th:errors="*{capacity}"></p>
                     </div>
                 </div>
@@ -43,9 +44,14 @@
                 </div>                       
                 <div class="form-group row">
                     <div class="col-sm-5 text-right">
-                        <input type="reset" class="btn btn-default" value="クリア">
+                        <input type="reset" class="btn btn-outline-warning" value="クリア">
                         <input type="submit" class="btn btn-primary" value="登録">
                     </div>                    
+                </div>
+                <div class="col-sm-5 center-block">
+                    <a href="/item" th:href="@{/item}">
+                        <button type="button" class="btn btn-outline-info btn-lg">戻る</button>
+                    </a>
                 </div>
             </form>
         </div>

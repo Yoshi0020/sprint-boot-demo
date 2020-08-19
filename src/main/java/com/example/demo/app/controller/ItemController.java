@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import com.example.demo.app.form.ItemForm;
+import com.example.demo.app.helper.ItemHelper;
 import com.example.demo.domain.entity.Item;
 import com.example.demo.domain.service.ItemService;
 
@@ -21,8 +22,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/item")
 public class ItemController {
-	@Autowired
+	
 	private ItemService service;
+	private ItemHelper helper;
+
+	@Autowired
+	public ItemController(final ItemService service, final ItemHelper helper)
+	{
+		this.service = service;
+		this.helper = helper;
+	}
 
 	@GetMapping
 	public String index(Model model) {
@@ -35,19 +44,19 @@ public class ItemController {
 
 	@GetMapping("regist")
 	public String showRegist(Model model) {
-		model.addAttribute("form", new ItemForm());
+		model.addAttribute("itemForm", new ItemForm());
 		return "item/regist";
 	}
 
 	@PostMapping("regist")
-	public String regist(@ModelAttribute("form") @Valid ItemForm itemForm, BindingResult result, Model model) {
-		if (result.hasErrors()) {
+	public String regist(@ModelAttribute("itemForm") @Valid ItemForm itemForm, BindingResult result, Model model) {
+		if (result.hasErrors() == true) {
 			
-			model.addAttribute("form", itemForm);
+			model.addAttribute("itemForm", itemForm);
 			return "item/regist";
 		}
 
-		service.save(itemForm.createItem());
+		service.save(helper.convertFormToItem(itemForm));
 
 		List<Item> itemList = service.findAll();
 
@@ -56,20 +65,47 @@ public class ItemController {
 	}
 
 	@GetMapping("edit/{id}")
-	public String showEdit(@PathVariable int id, Model model) {
+	public String showEdit(@PathVariable Integer id, Model model) {
 
-		Item item = service.findOne(id);
-		model.addAttribute("item", item);
+		final Item item = service.findOne(id);
+
+		final ItemForm form = new ItemForm();
+
+		helper.setItemFormFromItem(form, item);
+		model.addAttribute("itemForm", form);
 		return "item/edit";
 	}
 
-	@PostMapping("edit/{id}")
-	public String update(@ModelAttribute("item") Item item, Model model) {
-		service.update(item);
+	@PostMapping(path = "edit/{id}", params = "update")
+	public String update(@ModelAttribute("itemForm") @Valid ItemForm itemForm,  BindingResult result, Model model) {
+		if (result.hasErrors() == true) {
+			
+			model.addAttribute("itemForm", itemForm);
+			return "item/edit";
+		}
+		if (itemForm.getId() == null || itemForm.getId() == 0){
+			throw new IllegalAccessError();
+		}
+
+		service.update(this.helper.convertFormToItem(itemForm));
 
 		List<Item> itemList = service.findAll();
 
 		model.addAttribute("items", itemList);
 		return "item/list";
 	}
+
+	@PostMapping(path = "edit/{id}", params = "delete")
+	public String delete(@ModelAttribute("itemForm") ItemForm itemForm, Model model) {
+		if (itemForm.getId() == null || itemForm.getId() == 0){
+			throw new IllegalAccessError();
+		}
+
+		service.delete(itemForm.getId());
+
+		List<Item> itemList = service.findAll();
+
+		model.addAttribute("items", itemList);
+		return "item/list";
+	}	
 }
