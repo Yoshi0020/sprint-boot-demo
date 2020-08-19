@@ -1,0 +1,41 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <title>顧客一覧</title>
+</head>
+
+<body>
+    <div class="contents">
+        <div class="container">
+            <h1>顧客一覧</h1>
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <th>#</th>
+                    <th>顧客名</th>
+                    <th>メールアドレス</th>
+                    <th></th>
+                </thead>
+                <tbody>
+                    <tr th:each="customer : ${customers}">
+                        <td class="col-xs-1" th:text=${customer.id}>ID</td>
+                        <td class="col-xs-4" th:text=${customer.name}>顧客名</td>
+                        <td class="col-xs-5" th:text=${customer.email}>メールアドレス</td>
+                        <td class="col-xs-1"><a href="#"
+                                th:href="@{/manage/customer/edit/{id}(id=${customer.id})}">詳細</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-sm-12 text-right">
+                    <a href="/manage/customer/regist" th:href="@{/manage/customer/regist}">
+                        <button type="button" class="btn btn-primary">新規</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>

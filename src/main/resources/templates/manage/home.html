@@ -1,0 +1,28 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <title>ユーザー画面</title>
+</head>
+
+<body>
+    <div class="contnts">
+        <div class="container">
+            <h1>ユーザーページ</h1>
+            <div>
+                <a href="/manage/item" th:href="@{/manage/item}">
+                    <button type="button" class="btn btn-link">商品一覧</button>
+                </a>
+            </div>
+            <div>
+                <a href="/manage/customer" th:href="@{/manage/customer}">
+                    <button type="button" class="btn btn-link">顧客一覧</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

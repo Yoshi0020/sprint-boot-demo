@@ -6,14 +6,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Min;
 
-import com.example.demo.domain.entity.Item;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
-
 @Data
 public class ItemForm {
-    private Integer id;
+    private Integer id = 0; //TODO 暫定処置
 
     @NotBlank
     private String name;

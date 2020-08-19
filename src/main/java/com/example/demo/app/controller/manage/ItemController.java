@@ -1,4 +1,4 @@
-package com.example.demo.app.controller;
+package com.example.demo.app.controller.manage;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/item")
+@RequestMapping("/manage/item")
 public class ItemController {
 	
 	private ItemService service;
@@ -34,18 +34,23 @@ public class ItemController {
 	}
 
 	@GetMapping
-	public String index(Model model) {
+	public String index() {
 
+		return "forward:/manage/item/list";
+	}
+
+	@GetMapping("list")
+	public String showList(Model model){
 		List<Item> itemList = service.findAll();
 
 		model.addAttribute("items", itemList);
-		return "item/list";
+		return "manage/item/list";
 	}
 
 	@GetMapping("regist")
 	public String showRegist(Model model) {
 		model.addAttribute("itemForm", new ItemForm());
-		return "item/regist";
+		return "manage/item/regist";
 	}
 
 	@PostMapping("regist")
@@ -53,7 +58,7 @@ public class ItemController {
 		if (result.hasErrors() == true) {
 			
 			model.addAttribute("itemForm", itemForm);
-			return "item/regist";
+			return "manage/item/regist";
 		}
 
 		service.save(helper.convertFormToItem(itemForm));
@@ -61,7 +66,7 @@ public class ItemController {
 		List<Item> itemList = service.findAll();
 
 		model.addAttribute("items", itemList);
-		return "item/list";
+		return "manage/item/list";
 	}
 
 	@GetMapping("edit/{id}")
@@ -73,7 +78,7 @@ public class ItemController {
 
 		helper.setItemFormFromItem(form, item);
 		model.addAttribute("itemForm", form);
-		return "item/edit";
+		return "manage/item/edit";
 	}
 
 	@PostMapping(path = "edit/{id}", params = "update")
@@ -81,7 +86,7 @@ public class ItemController {
 		if (result.hasErrors() == true) {
 			
 			model.addAttribute("itemForm", itemForm);
-			return "item/edit";
+			return "manage/item/edit";
 		}
 		if (itemForm.getId() == null || itemForm.getId() == 0){
 			throw new IllegalAccessError();
@@ -92,7 +97,7 @@ public class ItemController {
 		List<Item> itemList = service.findAll();
 
 		model.addAttribute("items", itemList);
-		return "item/list";
+		return "manage/item/list";
 	}
 
 	@PostMapping(path = "edit/{id}", params = "delete")
@@ -106,6 +111,6 @@ public class ItemController {
 		List<Item> itemList = service.findAll();
 
 		model.addAttribute("items", itemList);
-		return "item/list";
+		return "manage/item/list";
 	}	
 }

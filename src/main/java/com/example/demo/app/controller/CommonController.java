@@ -6,8 +6,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class CommonController {
 
-    @RequestMapping("/")
+    @RequestMapping(value={"/", "/manage"})
     public String index() {
-        return "redirect:/item";
+        return "redirect:/manage/home";
+    }
+
+    @RequestMapping("/manage/home")
+    public String indexManage(){
+        return "/manage/home";
     }
 }
