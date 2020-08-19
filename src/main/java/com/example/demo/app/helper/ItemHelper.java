@@ -15,7 +15,7 @@ public class ItemHelper {
         item.setCapacity(form.getCapacity());
         item.setPrice(form.getPrice());
         item.setCalorie(form.getCalorie());
-        item.setUrl(form.getUrl());
+        // item.setUrl(form.getUrl());
 
         return item;
     }

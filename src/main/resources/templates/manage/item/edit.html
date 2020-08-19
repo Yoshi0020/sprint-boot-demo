@@ -12,17 +12,19 @@
     <div class="contents">
         <div class="container">
             <h1>編集</h1>
-            <form method="POST" action="/item" th:action="@{/item/edit/{id}(id=*{id})}" th:object="${itemForm}">
+            <form method="POST" action="/manage/item" th:action="@{/manage/item/edit/{id}(id=*{id})}"
+                th:object="${itemForm}">
                 <div class="form-group row">
                     <label for="id" class="col-sm-1 control-label col-form-label">商品ID</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" id="id" th:field="*{id}" readonly>
                     </div>
-                </div>                
+                </div>
                 <div class="form-group row">
                     <label for="itemName" class="col-sm-1 control-label col-form-label">商品名</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="itemName" name="name" th:field="*{name}" th:errorclass="fieldError">
+                        <input type="text" class="form-control" id="itemName" name="name" th:field="*{name}"
+                            th:errorclass="fieldError">
                         <p class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
                     </div>
                 </div>
@@ -53,10 +55,12 @@
                         <input type="submit" class="btn btn-primary" name="update" value="更新">
                     </div>
                 </div>
-                <div class="col-sm-5 center-block">
-                    <a href="/item" th:href="@{/item}">
-                        <button type="button" class="btn btn-outline-info btn-lg">戻る</button>
-                    </a>
+                <div class="col-sm-5">
+                    <div class="mx-auto">
+                        <a href="/manage/item" th:href="@{/manage/item}">
+                            <button type="button" class="btn btn-outline-info btn-lg">戻る</button>
+                        </a>
+                    </div>
                 </div>
             </form>
         </div>
