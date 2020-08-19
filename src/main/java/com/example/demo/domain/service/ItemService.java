@@ -7,6 +7,7 @@ import com.example.demo.domain.repository.ItemMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ItemService {
@@ -18,18 +19,26 @@ public class ItemService {
         return mapper.findAll();
     }
 
-    public Item findOne(int id)
+    public Item findOne(final Integer id)
     {
         return mapper.findOne(id);
     }
 
-    public void save(Item item)
+    @Transactional
+    public Integer save(final Item item)
     {
-        mapper.create(item);
+        return mapper.create(item);
     }
 
-    public void update(Item item)
+    @Transactional
+    public Integer update(final Item item)
     {
-        mapper.update(item);
+        return mapper.update(item);
+    }
+
+    @Transactional
+    public Integer delete(final Integer id)
+    {
+        return mapper.delete(id);
     }
 }

@@ -24,11 +24,12 @@
                 <tbody>
                     <tr th:each="item : ${items}">
                         <td class="col-xs-1" th:text="${item.id}">ID</td>
-                        <td class="col-xs-3"th:text="${item.name}">商品名</td>
-                        <td class="col-xs-2"th:text="${item.capacity} + 'g'">内容量</td>
-                        <td class="col-xs-2"th:text="${item.price} + '円'">価格</td>
-                        <td class="col-xs-2"th:text="${item.calorie} + 'kcal'">カロリー</td>
-                        <td class="col-xs-2"><a href="/item/edit/" th:href="@{/item/edit/{id}(id=${item.id})}">詳細</a></td>
+                        <td class="col-xs-3" th:text="${item.name}">商品名</td>
+                        <td class="col-xs-2" th:text="${item.capacity} + 'g'">内容量</td>
+                        <td class="col-xs-2" th:text="${item.price} + '円'">価格</td>
+                        <td class="col-xs-2" th:text="${item.calorie} + 'kcal'">カロリー</td>
+                        <td class="col-xs-2"><a href="/item/edit/" th:href="@{/item/edit/{id}(id=${item.id})}">詳細</a>
+                        </td>
                     </tr>
                 </tbody>
             </table>
