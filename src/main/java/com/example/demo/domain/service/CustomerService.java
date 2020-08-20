@@ -3,8 +3,10 @@ package com.example.demo.domain.service;
 import java.util.List;
 
 import com.example.demo.domain.entity.Customer;
+import com.example.demo.domain.entity.Item;
 import com.example.demo.domain.entity.PurchaseHistory;
 import com.example.demo.domain.mapper.CustomerMapper;
+import com.example.demo.domain.mapper.ItemMapper;
 import com.example.demo.domain.mapper.PurchaseHistoryMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +16,14 @@ import org.springframework.stereotype.Service;
 public class CustomerService {
 
     private CustomerMapper customerMapper;
+    private ItemMapper itemMapper;
     private PurchaseHistoryMapper historyMapper;
 
     @Autowired
-    public CustomerService(final CustomerMapper customerMapper, final PurchaseHistoryMapper historyMapper) {
+    public CustomerService(final CustomerMapper customerMapper, final ItemMapper itemMapper,
+            final PurchaseHistoryMapper historyMapper) {
         this.customerMapper = customerMapper;
+        this.itemMapper = itemMapper;
         this.historyMapper = historyMapper;
     }
 
@@ -42,7 +47,11 @@ public class CustomerService {
         return this.customerMapper.Delete(id);
     }
 
-    public List<PurchaseHistory> findPurchaseHistories(final Integer customerId){
+    public List<PurchaseHistory> findPurchaseHistories(final Integer customerId) {
         return this.historyMapper.findPurchaseHistory(customerId);
+    }
+
+    public List<Item> findAllItems(){
+        return this.itemMapper.findAll();
     }
 }
