@@ -75,7 +75,8 @@ public class CustomerController {
         final Customer customer = this.service.fineOnd(id);
 
         this.helper.setItemFormFromItem(customerForm, customer);
-        customerForm.setPurchaseHistories(this.service.findPurchaseHistories(id));
+        customerForm.setPurchaseHistories(this.service.findPurchaseHistories(id,
+                this.helper.createHistorySearchCriteriaFromCustomForm(customerForm)));
         customerForm.setItems(this.service.findAllItems());
 
         model.addAttribute("customerForm", customerForm);

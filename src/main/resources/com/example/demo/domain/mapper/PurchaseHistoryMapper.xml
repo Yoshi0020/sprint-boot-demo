@@ -16,10 +16,28 @@
         LEFT JOIN
             demo.item AS t2
         ON
-            t2.id = t1.customer_id
+            t2.id = t1.item_id
         WHERE
             t1.customer_id = #{customerId}
-        ORDER BY
+            <if test="criteria.fromDate != null">
+            <![CDATA[
+            AND
+                t1.purchase_at >= #{criteria.fromDate}
+            ]]>                
+            </if>
+            <if test="criteria.toDate != null">
+            <![CDATA[
+            AND
+                t1.purchase_at <= #{criteria.toDate}
+            ]]>
+            </if>
+            <if test="criteria.selectedItem != null">
+            <![CDATA[            
+            AND
+                t1.item_id = #{criteria.selectedItem} 
+            ]]>                
+            </if>
+            ORDER BY
             t1.customer_id,
             t1.purchase_at,
             t1.seq

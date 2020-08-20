@@ -8,6 +8,7 @@ import com.example.demo.domain.entity.PurchaseHistory;
 import com.example.demo.domain.mapper.CustomerMapper;
 import com.example.demo.domain.mapper.ItemMapper;
 import com.example.demo.domain.mapper.PurchaseHistoryMapper;
+import com.example.demo.domain.model.manage.customer.HistorySearchCriteria;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,8 +48,8 @@ public class CustomerService {
         return this.customerMapper.Delete(id);
     }
 
-    public List<PurchaseHistory> findPurchaseHistories(final Integer customerId) {
-        return this.historyMapper.findPurchaseHistory(customerId);
+    public List<PurchaseHistory> findPurchaseHistories(final Integer customerId, final HistorySearchCriteria criteria) {
+        return this.historyMapper.findPurchaseHistory(customerId, criteria);
     }
 
     public List<Item> findAllItems(){
