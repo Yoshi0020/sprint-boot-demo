@@ -11,6 +11,9 @@
     <div class="contnts">
         <div class="container">
             <h1>ユーザーページ</h1>
+            <form action="#" th:action="@{/logout}" method="POST">
+                <input type="submit" value="ログアウト" />
+            </form>
             <div>
                 <a href="/manage/item" th:href="@{/manage/item}">
                     <button type="button" class="btn btn-link">商品一覧</button>
