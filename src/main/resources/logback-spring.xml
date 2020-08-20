@@ -6,7 +6,7 @@
         <file>./log/${LOG_FILE}</file>
         
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_FILE}.%d{yyyyMMdd}</fileNamePattern>    
+            <fileNamePattern>./log/${LOG_FILE}.%d{yyyyMMdd}</fileNamePattern>    
             <maxHistory>5</maxHistory>
 
         </rollingPolicy>

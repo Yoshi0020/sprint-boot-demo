@@ -12,8 +12,8 @@
     <div class="contents">
         <div class="container">
             <h1>編集</h1>
-            <form method="POST" class="mb-5" action="/manage/customer" th:action="@{/manage/customer/edit/{id}(id=*{id})}"
-                th:object="${customerForm}">
+            <form method="POST" class="mb-5" action="/manage/customer"
+                th:action="@{/manage/customer/edit/{id}(id=*{id})}" th:object="${customerForm}">
                 <div class="form-group row">
                     <label for="id" class="col-sm-2 control-label col-form-label">顧客ID</label>
                     <div class="col-sm-4">
@@ -66,22 +66,52 @@
             <div>
                 <h2>購入履歴</h2>
                 <div>
-                    <table class="table table-hover table-bordered">
-                        <thead>
-                            <th>取引日付</th>
-                            <th>商品名</th>
-                            <th>個数</th>
-                            <th>金額</th>
-                        </thead>
-                        <tbody>
-                            <tr th:each="history : ${customerForm.purchaseHistories}">
-                                <td class="col-xs-3" th:text=${history.purchaseAt}>取引日付</td>
-                                <td class="col-xs-3" th:text=${history.item.name}>商品名</td>
-                                <td class="col-xs-2" th:text=${history.number}>個数</td>
-                                <td class="col-xs-2" th:text=${history.payment}>金額</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="border border-secondary">
+                        <form method="GET" th:action="@{/manage/customer/edit/{id}(id=*{id})}" th:object="${customerForm}">
+                            <div class="form-group row mt-1 mb-1">
+                                <label class="col-sm-1 control-label col-form-label">購入日</label>
+                                <div class="col-sm-10">
+                                    <input type="date" th:field="*{fromDate}"> ～ <input type="date" th:field="*{toDate}">
+                                </div>
+                            </div>
+                            <div class="form-group row mb-1">
+                                <label class="col-sm-1 control-label col-form-label">購入商品</label>
+                                <div class="col-sm-10">
+                                    <select name="selectedItem" class="mt-1">
+                                        <option ></option>---</option>
+                                        <option th:each="item : *{items}" th:value="${item.id}" th:selected="${item.id} == *{selectedItem}" th:inline="text">[[${item.id}]]：[[${item.name}]]</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row mb-1 text-right">
+                                <div class="col-sm-12">
+                                    <input type="submit" class="btn btn-success" value="検索">     
+                                    <input type="reset" class="btn btn-warning" value="クリア">        
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div th:if="${#lists.isEmpty(customerForm.purchaseHistories) == false}">
+                        <table class="table table-hover table-bordered">
+                            <thead>
+                                <th>取引日付</th>
+                                <th>商品名</th>
+                                <th>個数</th>
+                                <th>金額</th>
+                            </thead>
+                            <tbody>
+                                <tr th:each="history : ${customerForm.purchaseHistories}">
+                                    <td class="col-xs-3" th:text=${history.purchaseAt}>取引日付</td>
+                                    <td class="col-xs-3" th:text=${history.item.name}>商品名</td>
+                                    <td class="col-xs-2" th:text=${history.number}>個数</td>
+                                    <td class="col-xs-2" th:text=${history.payment}>金額</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div th:if="${#lists.isEmpty(customerForm.purchaseHistories) == true}">
+                        <p>購入履歴はありません</p>
+                    </div>
                 </div>
             </div>
         </div>

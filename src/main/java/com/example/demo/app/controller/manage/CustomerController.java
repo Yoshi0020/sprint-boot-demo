@@ -45,9 +45,9 @@ public class CustomerController {
     }
 
     @GetMapping("regist")
-    public String showRegist(final Model model) {
+    public String showRegist(@ModelAttribute("customerForm") CustomerForm customerForm, final Model model) {
 
-        model.addAttribute("customerForm", new CustomerForm());
+        model.addAttribute("customerForm", customerForm);
         return "manage/customer/regist";
     }
 
@@ -71,12 +71,13 @@ public class CustomerController {
     }
 
     @GetMapping("edit/{id}")
-    public String showEdit(@PathVariable Integer id, Model model) {
+    public String showEdit(@PathVariable Integer id, CustomerForm customerForm, Model model) {
         final Customer customer = this.service.fineOnd(id);
 
-        final CustomerForm customerForm = new CustomerForm();
         this.helper.setItemFormFromItem(customerForm, customer);
-        customerForm.setPurchaseHistories(this.service.findPurchaseHistories(id));
+        customerForm.setPurchaseHistories(this.service.findPurchaseHistories(id,
+                this.helper.createHistorySearchCriteriaFromCustomForm(customerForm)));
+        customerForm.setItems(this.service.findAllItems());
 
         model.addAttribute("customerForm", customerForm);
         return "manage/customer/edit";
