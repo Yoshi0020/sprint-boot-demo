@@ -8,7 +8,7 @@ import javax.validation.constraints.Min;
 
 @Data
 public class ItemForm {
-    private Integer id = 0; //TODO 暫定処置
+    private Integer id;
 
     @NotBlank
     private String name;

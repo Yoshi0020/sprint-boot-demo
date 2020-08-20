@@ -9,15 +9,15 @@ public class Item implements Serializable{
 
     private static final long serialVersionUID = 1L;
  
-    private int id;    
+    private Integer id;    
 
     private String name;
 
-    private int capacity;
+    private Integer capacity;
 
-    private int price;
+    private Integer price;
 
-    private int calorie;
+    private Integer calorie;
 
     private String url;
 

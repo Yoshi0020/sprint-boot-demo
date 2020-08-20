@@ -12,7 +12,7 @@ import lombok.Data;
 @Data
 public class CustomerForm {
     
-    private Integer id = 0; // TODO 暫定処置
+    private Integer id; 
 
     @NotBlank
     private String name;
